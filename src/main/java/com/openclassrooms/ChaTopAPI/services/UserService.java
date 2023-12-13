@@ -1,7 +1,5 @@
 package com.openclassrooms.ChaTopAPI.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +14,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> getUser(final Long id) {
-        return userRepository.findById(id);
+    public User getUser(final Long id) {
+        if (userRepository.findById(id).isPresent()) {
+            return userRepository.findById(id).get();
+        }
+        return null;
+    }
+
+    public User getUserByEmail(String email) {
+
+        return userRepository.findByEmail(email);
     }
 
     public void deleteUser(final Long id) {

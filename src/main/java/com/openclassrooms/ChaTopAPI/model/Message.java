@@ -1,6 +1,6 @@
 package com.openclassrooms.ChaTopAPI.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,8 +27,8 @@ public class Message {
     private Long userId;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Timestamp createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private Timestamp updatedAt;
 }
