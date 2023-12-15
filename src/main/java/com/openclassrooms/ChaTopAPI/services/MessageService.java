@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,16 @@ public class MessageService {
      * @return The Dto representation of the Message entity.
      */
     private Message dtoToEntity(MessageDto messageDto) {
+        PropertyMap<MessageDto, Message> clientPropertyMap = new PropertyMap<MessageDto, Message>() {
+            @Override
+            protected void configure() {
+                skip(destination.getId());
+            }
+        };
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
+        modelMapper.addMappings(clientPropertyMap);
+
         return modelMapper.map(messageDto, Message.class);
+
     }
 }
