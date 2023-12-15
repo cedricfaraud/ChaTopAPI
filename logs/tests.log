@@ -271,3 +271,5 @@ com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACL
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Unknown Source)
+24026 [http-nio-3001-exec-2] ERROR c.o.C.controllers.LoginController - Login user : LoginDto(login=test1@test.com, password=test!11)
+24267 [http-nio-3001-exec-2] ERROR c.o.C.controllers.LoginController - Login user found : User(id=8, name=test1 TEST1, email=test1@test.com, password=$2a$10$Dqf0/Rd/6mKZr258SCrT0epzEKqkR.vw8ERxPsLyNS3nt1jJ2tTJG, createdAt=2023-12-14 18:12:00.0, updatedAt=2023-12-14 18:12:00.0)
