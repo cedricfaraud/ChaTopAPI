@@ -56,7 +56,7 @@ public class LoginController {
     public ResponseEntity<LoginResponse> userLogin(@RequestBody @Valid LoginDto loginDto) {
         logger.error("Login user : " + loginDto);
         try {
-            User user = userService.getUserByEmail(loginDto.getLogin());
+            User user = userService.userLogin(loginDto.getLogin(), loginDto.getPassword());
             if (user == null) {
                 throw new BadCredentialsException("Bad mail : " + loginDto.getLogin());
             }

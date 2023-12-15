@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +46,14 @@ public class UserService implements UserDetailsService {
     }
 
     public User userLogin(String email, String password) {
-        return null;
+        User userByEmail = getUserByEmail(email);
+
+        logger.error("Login user found : " + userByEmail);
+        if (!bcryptEncoder.matches(password, userByEmail.getPassword())) {
+            throw new BadCredentialsException("Bad password");
+        }
+
+        return userByEmail;
     }
 
     public void deleteUser(final Long id) {
