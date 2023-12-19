@@ -1,8 +1,5 @@
 package com.openclassrooms.ChaTopAPI.services;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.slf4j.Logger;
@@ -28,11 +25,8 @@ public class MessageService {
 
     public String saveMessage(MessageDto messageDto) {
         String message = "Message send with success";
-        logger.error("Create message : " + messageDto);
+        logger.trace("Create message : " + messageDto);
         Message messageToSend = dtoToEntity(messageDto);
-        messageToSend.setCreatedAt(Timestamp.from(Instant.now()));
-        messageToSend.setUpdatedAt(Timestamp.from(Instant.now()));
-
         messageRepository.save(messageToSend);
 
         return message;

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_DIR" value="./logs/" />
+	<property name="LOG_ROOT" value="c:/temp/logs" />
+	<property name="LOG_FILE_NAME" value="chatop" />
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_DIR}/tests.log</file>
-        <append>true</append>
+        <file>${LOG_ROOT}/chatop.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_ROOT}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- each archived file's size will be max 10MB -->
+			<maxFileSize>1MB</maxFileSize>    
+			<!-- 30 days to keep -->
+			<maxHistory>5</maxHistory>
+			<!-- total size of all archive files, if total size > 100GB, it will delete old archived file -->
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
         <encoder>
             <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
@@ -14,8 +23,8 @@
         </encoder>
     </appender>
     <logger name="com.openclassrooms" level="INFO" /> 
-    <logger name="com.openclassrooms.ChaTopAPI" level="WARN" /> 
-    <root level="warn">
+    <logger name="com.openclassrooms.ChaTopAPI" level="error" /> 
+    <root level="error">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>

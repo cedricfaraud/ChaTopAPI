@@ -39,7 +39,6 @@ public class S3FileService {
         putObjectRequest.setAccessControlList(acl);
         amazonS3.putObject(putObjectRequest);
 
-        // amazonS3.putObject(s3BucketName, objectName, objectToUpload);
         return amazonS3.getUrl(s3BucketName, objectName).toString();
     }
 

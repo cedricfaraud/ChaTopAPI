@@ -2,7 +2,11 @@ package com.openclassrooms.ChaTopAPI.model;
 
 import java.sql.Timestamp;
 
-import jakarta.persistence.Column;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,12 +32,14 @@ public class Rental {
 
     private String description;
 
-    @Column(name = "owner_id") // Nom rentals_ibfk_1
+    @JsonProperty("owner_id")
     private Long ownerId;
 
-    @Column(name = "created_at")
+    @JsonProperty(value = "created_at")
+    @CreationTimestamp
     private Timestamp createdAt;
 
-    @Column(name = "updated_at")
+    @JsonProperty(value = "updated_at")
+    @UpdateTimestamp
     private Timestamp updatedAt;
 }

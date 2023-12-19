@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,11 +41,11 @@ public class User {
     @NonNull
     private String password;
 
-    @Column(name = "created_at")
+    @JsonProperty(value = "created_at")
     @CreationTimestamp
     private Timestamp createdAt;
 
-    @Column(name = "updated_at")
+    @JsonProperty(value = "updated_at")
     @UpdateTimestamp
     private Timestamp updatedAt;
 }

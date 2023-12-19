@@ -2,6 +2,7 @@ package com.openclassrooms.ChaTopAPI.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.ChaTopAPI.controllers.RentalController;
@@ -27,12 +29,14 @@ public class UserService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(RentalController.class);
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
     public User getUser(final Long id) {
         Optional<User> byId = userRepository.findById(id);
-        logger.error("User : " + byId);
+        logger.trace("User : " + byId);
         if (byId.isPresent()) {
-            logger.error("User : " + byId);
+            logger.trace("User : " + byId);
 
             return userRepository.findById(id).get();
         }
@@ -40,15 +44,13 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserByEmail(String email) {
-
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Bad mail : " + email));
+                .orElseThrow(() -> new NoSuchElementException("Bad mail : " + email));
     }
 
     public User userLogin(String email, String password) {
         User userByEmail = getUserByEmail(email);
-
-        logger.error("Login user found : " + userByEmail);
+        logger.info("Login user found : " + userByEmail);
         if (!bcryptEncoder.matches(password, userByEmail.getPassword())) {
             throw new BadCredentialsException("Bad password");
         }

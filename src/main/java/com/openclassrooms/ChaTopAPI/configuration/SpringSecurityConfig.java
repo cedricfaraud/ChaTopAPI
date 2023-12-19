@@ -3,6 +3,7 @@ package com.openclassrooms.ChaTopAPI.configuration;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,8 +31,8 @@ public class SpringSecurityConfig {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
-    private String jwtKey = "DssAQuXrhqOJ3c3PbCUo8rZZjKkS3CJjQQZ4RfD0v7I=";
+    @Value("${security.jwtKey}")
+    private String jwtKey;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
