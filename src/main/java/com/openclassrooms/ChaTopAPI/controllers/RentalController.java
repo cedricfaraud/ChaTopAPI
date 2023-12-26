@@ -25,6 +25,7 @@ import com.openclassrooms.ChaTopAPI.model.User;
 import com.openclassrooms.ChaTopAPI.services.RentalService;
 import com.openclassrooms.ChaTopAPI.services.UserService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -98,6 +99,7 @@ public class RentalController {
      * @param authentication
      * @return ack delete message
      */
+    @Hidden
     @DeleteMapping(value = "/api/rentals/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Delete rental by id", description = "Delete a rental with the rental id")
     public ResponseEntity<MessageResponse> deleteRental(@PathVariable Long id, Authentication authentication) {
