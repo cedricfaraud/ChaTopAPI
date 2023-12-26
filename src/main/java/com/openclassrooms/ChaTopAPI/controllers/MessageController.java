@@ -30,7 +30,7 @@ public class MessageController {
      * Create message
      * 
      * @param messageDto
-     * @return
+     * @return ack message
      */
     @PostMapping(value = "/api/messages", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create new message", description = "Create a new message with the specified informations")

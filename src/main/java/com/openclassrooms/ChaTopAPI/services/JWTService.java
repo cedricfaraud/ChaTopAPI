@@ -36,17 +36,4 @@ public class JWTService {
         String token = this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
         return token;
     }
-
-    /**
-     * Get the username from the JWT token.
-     *
-     * @param token The JWT token.
-     * @return The username extracted from the token.
-     */
-    // public String getUsername(String token) {
-
-    // Claims claims =
-    // Jwts.parser().setSigningKey(jwtKey).parseClaimsJws(token).getBody();
-    // return claims.getSubject().split(",")[0];
-    // }
 }

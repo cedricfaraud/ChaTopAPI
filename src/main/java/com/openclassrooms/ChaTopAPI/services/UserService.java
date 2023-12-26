@@ -3,7 +3,6 @@ package com.openclassrooms.ChaTopAPI.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,14 +32,8 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder bcryptEncoder;
 
     public User getUser(final Long id) {
-        Optional<User> byId = userRepository.findById(id);
-        logger.trace("User : " + byId);
-        if (byId.isPresent()) {
-            logger.trace("User : " + byId);
-
-            return userRepository.findById(id).get();
-        }
-        return null;
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Bad id : " + id));
     }
 
     public User getUserByEmail(String email) {

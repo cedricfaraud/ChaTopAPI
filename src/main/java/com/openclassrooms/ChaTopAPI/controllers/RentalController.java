@@ -45,7 +45,7 @@ public class RentalController {
      * 
      * @param rentalDto
      * @param authentication
-     * @return
+     * @return ack create message
      */
     @PostMapping(value = "/api/rentals", consumes = {
             MediaType.MULTIPART_FORM_DATA_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,7 +76,7 @@ public class RentalController {
      * 
      * @param rentalDto
      * @param authentication
-     * @return
+     * @return ack update message
      */
     @PutMapping(value = "/api/rentals/{id}", consumes = {
             MediaType.MULTIPART_FORM_DATA_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -92,16 +92,17 @@ public class RentalController {
     }
 
     /**
-     * Delete rental by id
+     * Delete rental by id (for future use)
      * 
      * @param id
      * @param authentication
-     * @return
+     * @return ack delete message
      */
     @DeleteMapping(value = "/api/rentals/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Delete rental by id", description = "Delete a rental with the rental id")
     public ResponseEntity<MessageResponse> deleteRental(@PathVariable Long id, Authentication authentication) {
 
+        // future upgrade to delete rental
         MessageResponse response = new MessageResponse();
         logger.trace("Rental to delete : " + id);
         try {
@@ -121,7 +122,7 @@ public class RentalController {
     /**
      * Get all rentals
      * 
-     * @return
+     * @return all rentals
      */
     @GetMapping(value = "/api/rentals", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get list rentals", description = "Retrieve information of all rentals")
@@ -137,7 +138,7 @@ public class RentalController {
      * Get rental by id
      * 
      * @param id
-     * @return
+     * @return rental
      */
     @GetMapping(value = "/api/rentals/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get rental by id", description = "Retrieve rental information specified by his id")

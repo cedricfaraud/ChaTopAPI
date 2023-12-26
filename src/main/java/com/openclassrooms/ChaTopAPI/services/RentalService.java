@@ -126,7 +126,7 @@ public class RentalService {
      * delete file on amazon S3
      * 
      * @param fileName
-     * @return
+     * @return ack delete message
      */
     private String deleteFile(final String fileName) {
         s3FileService.deleteObject(s3FileService.getS3BucketName(), fileName);
@@ -156,6 +156,7 @@ public class RentalService {
                     file.delete();
                 }
             } catch (SdkClientException amz) {
+                // future upgrade to resend file
                 urlPicture = file.getAbsolutePath();
                 logger.error("Amazon error : " + amz.getMessage());
             }
@@ -186,7 +187,7 @@ public class RentalService {
      * Check extension
      * 
      * @param fileName
-     * @return
+     * @return true if file is png/jpg/jpeg
      */
     private Boolean isValideFile(String fileName) {
         List<String> allowedFileExtensions = new ArrayList<>(Arrays.asList("png", "jpg", "jpeg"));

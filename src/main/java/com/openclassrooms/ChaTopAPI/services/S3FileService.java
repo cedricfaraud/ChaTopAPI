@@ -30,7 +30,7 @@ public class S3FileService {
      * @param s3BucketName
      * @param objectName
      * @param objectToUpload
-     * @return
+     * @return object url
      */
     public String uploadObject(String s3BucketName, String objectName, File objectToUpload) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3BucketName, objectName, objectToUpload);

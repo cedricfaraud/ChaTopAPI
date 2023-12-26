@@ -45,7 +45,7 @@ public class LoginController {
      * User login
      * 
      * @param loginDto
-     * @return
+     * @return token
      */
     @PostMapping(value = "api/auth/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Authentication", description = "Authentication with email and password, return JWT")
@@ -55,9 +55,7 @@ public class LoginController {
             User user = userService.userLogin(loginDto.getEmail(), loginDto.getPassword());
             return ResponseEntity.status(HttpStatus.ACCEPTED)
                     .body(new LoginResponse(jwtService.generateToken(user.getEmail())));
-        } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } catch (NoSuchElementException ex) {
+        } catch (NoSuchElementException | BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
@@ -66,7 +64,7 @@ public class LoginController {
      * Create user
      * 
      * @param userDto
-     * @return
+     * @return token
      */
     @PostMapping(value = "api/auth/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Registration", description = "Register new user with email, username and password, return JWT")
@@ -92,7 +90,7 @@ public class LoginController {
      * Get logged user
      * 
      * @param authentication
-     * @return
+     * @return current user
      */
     @GetMapping(value = "api/auth/me", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Me", description = "Get information about connected user")
@@ -112,7 +110,7 @@ public class LoginController {
      * Get user by Id
      * 
      * @param id
-     * @return
+     * @return user
      */
     @GetMapping(value = "api/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get user by id", description = "Retrieve account information about user specified by his id")
