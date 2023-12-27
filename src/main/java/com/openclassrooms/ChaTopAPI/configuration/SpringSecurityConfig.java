@@ -45,7 +45,7 @@ public class SpringSecurityConfig {
                 }))
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/api/auth/login", "/api/auth/register", "/api/user/**",
+                                .requestMatchers("/api/auth/login", "/api/auth/register",
                                         "/v3/api-docs",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**",
